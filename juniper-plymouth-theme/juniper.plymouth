@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Juniper
+Description=macOS-based Arch theme
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/juniper
+ScriptFile=/usr/share/plymouth/themes/juniper/juniper.script

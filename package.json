@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "name": "juniper-plymouth-theme",
+  "version": "0.2.0",
+  "description": "A smart, simple Plymouth.",
+  "scripts": {
+    "pre-release": "scrivano",
+    "release": "standard-version"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paysonwallach/aqua-plymouth-theme.git"
+  },
+  "author": "Payson Wallach <payson@paysonwallach.com>",
+  "license": "Hippocratic-2.1",
+  "bugs": {
+    "url": "https://github.com/paysonwallach/aqua-plymouth-theme/issues"
+  },
+  "homepage": "https://github.com/paysonwallach/aqua-plymouth-theme#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "husky": "^7.0.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.2",
+    "prettier-package-json": "^2.6.0",
+    "scrivano": "^0.1.0",
+    "standard-version": "^9.3.0"
+  },
+  "standard-version": {
+    "scripts": {
+      "precommit": "npm run pre-release"
+    }
+  }
+}

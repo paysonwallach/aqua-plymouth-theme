@@ -1,0 +1,82 @@
+#
+# Placeholder
+#
+
+fun ProgressCallback(duration, progress) {
+    if (progress_bar.image.GetWidth() !=
+            Math.Int(progress_bar.original_image.GetWidth() * progress)) {
+        progress_bar.image = progress_bar.original_image.Scale(
+            progress_bar.original_image.GetWidth(progress_bar.original_image) *
+            progress,
+            progress_bar.original_image.GetHeight());
+
+        progress_bar.sprite.SetImage(progress_bar.image);
+    }
+}
+
+fun RefreshCallBack() {
+    if (count < 3) {
+        count++;
+    } else {
+        time++;
+
+        if (time >= 12)
+            time = 0;
+        count = 0;
+    }
+
+    anim.image = Image("throbber-0" + time + ".png");
+    anim.sprite.SetImage(anim.image);
+}
+
+# Set background color
+Window.SetBackgroundTopColor(0, 0, 0);
+Window.SetBackgroundBottomColor(0, 0, 0);
+
+# Render progress bar on startup
+if (Plymouth.GetMode() == "boot") {
+    # Add logo
+    logo.image = Image("logo.png");
+    logo.sprite = Sprite(logo.image);
+
+    logo.sprite.SetPosition(
+        Window.GetX() + Window.GetWidth() / 2 - logo.image.GetWidth() / 2,
+        Window.GetY() + Window.GetHeight() / 2 - logo.image.GetHeight() / 2,
+        1);
+
+    # Add progress bar
+    progress_bar_box.image = Image("progress_bar_box.png");
+    progress_bar_box.sprite = Sprite(progress_bar_box.image);
+
+    progress_bar_box.x = Window.GetX() + Window.GetWidth() / 2 -
+        progress_bar_box.image.GetWidth() / 2;
+    progress_bar_box.y = Window.GetY() + Window.GetHeight() * 0.75 -
+        progress_bar_box.image.GetHeight() / 2;
+    progress_bar_box.sprite.SetPosition(
+        progress_bar_box.x, progress_bar_box.y, 0);
+
+    progress_bar.original_image = Image("progress_bar.png");
+    progress_bar.sprite = Sprite();
+
+    progress_bar.x = Window.GetX() + Window.GetWidth() / 2 -
+        progress_bar.original_image.GetWidth() / 2;
+    progress_bar.y = Window.GetY() + Window.GetHeight() * 0.75 -
+        progress_bar_box.image.GetHeight() / 2 +
+        (progress_bar_box.image.GetHeight() -
+        progress_bar.original_image.GetHeight()) / 2;
+
+    progress_bar.sprite.SetPosition(progress_bar.x, progress_bar.y, 1);
+
+    Plymouth.SetBootProgressFunction(ProgressCallback);
+} else {
+    count = 0;
+    time = 0;
+    anim.image = Image("throbber-00.png");
+    anim.sprite = Sprite(anim.image);
+
+    anim.sprite.SetPosition(
+        Window.GetX() + Window.GetWidth() / 2 - anim.image.GetWidth() / 2,
+        Window.GetY() + Window.GetHeight() * 0.65, 1);
+
+    Plymouth.SetRefreshFunction(RefreshCallBack);
+}
